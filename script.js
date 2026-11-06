@@ -26,7 +26,7 @@ const CONFIG = {
    * Google Form Field Entry IDs (Đã trích xuất chính xác 100% từ Form):
    */
   entries: {
-    guestId: "entry.1000092928",      // Mã khách mời
+    guestId: "entry.1000092928",      // Chức vụ
     guestName: "entry.1260950142",    // Tên khách mời
     attendance: "entry.679443011",    // Xác nhận tham gia ("Tham gia" / "Không thể tham gia")
     notes: "entry.562253103"          // Ghi chú
