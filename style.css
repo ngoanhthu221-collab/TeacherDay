@@ -683,6 +683,87 @@ body::after {
   height: 16px;
 }
 
+.timeline-section {
+    padding: 40px 20px;
+    background-color: #fcfbf5; /* Màu nền vàng nhạt */
+    text-align: center;
+}
+
+.timeline-header {
+    margin-bottom: 40px;
+}
+
+.timeline-subtitle {
+    display: block;
+    color: #cca333; /* Màu vàng đồng */
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+.timeline-title {
+    color: #1a365d; /* Màu xanh navy */
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0;
+    font-family: serif;
+}
+
+.timeline-container {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: left;
+    padding-left: 20px;
+}
+
+/* Đường kẻ dọc màu xanh lợt */
+.timeline-line {
+    position: absolute;
+    top: 10px;
+    bottom: 10px;
+    left: 28px;
+    width: 2px;
+    background-color: #d1e2f3; 
+    z-index: 1;
+}
+
+.timeline-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 25px;
+    position: relative;
+    z-index: 2;
+}
+
+/* Dấu chấm tròn (được bọc trong một viền mờ) */
+.timeline-dot {
+    width: 18px;
+    height: 18px;
+    background-color: #3b71ca;
+    border-radius: 50%;
+    border: 4px solid #e8f0fe;
+    margin-right: 20px;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.timeline-time {
+    color: #1a569d;
+    font-weight: bold;
+    font-size: 16px;
+    width: 130px;
+    flex-shrink: 0;
+}
+
+.timeline-content {
+    color: #5f6c7b;
+    font-size: 16px;
+    flex-grow: 1;
+}
+
 /* --------------------------------------------------------------------------
    9. RSVP Section & Form
    -------------------------------------------------------------------------- */
