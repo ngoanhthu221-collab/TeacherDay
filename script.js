@@ -40,16 +40,14 @@ const CONFIG = {
     subtitle: "Ươm mầm tri thức — Vươn tầm tương lai",
     host: "WESET English Center",
     // ISO 8601 Date String for countdown & calendar (YYYY-MM-DDTHH:mm:ss+07:00)
-    dateISO: "2026-11-20T17:30:00+07:00",
-    endDateISO: "2026-11-20T21:30:00+07:00",
-    displayDate: "Thứ Sáu, ngày 20 tháng 11 năm 2026",
-    displayTime: "Đón khách: 17:30 | Khai mạc: 18:30",
-    venue: "Grand Ballroom • Khách sạn Sheraton Saigon",
-    address: "88 Đồng Khởi, Phường Bến Nghé, Quận 1, TP. Hồ Chí Minh",
-    mapUrl: "https://maps.google.com/?q=Sheraton+Saigon+Hotel+88+Dong+Khoi+Ho+Chi+Minh",
+    dateISO: "2026-11-18T17:00:00+07:00",
+    endDateISO: "2026-11-18T21:30:00+07:00",
+    displayDate: "17:00 – 21:20 • 18/11/2026",
+    venue: "Khách sạn Đồng Khánh",
+    address: "Số 2 Trần Hưng Đạo B, Phường An Đông, TP. Hồ Chí Minh",
+    mapUrl: "https://maps.app.goo.gl/CDC8GUV7KNxxcJUL8",
     deadlineText: "17/11/2026",
-    dressCode: "Lịch sự / Trang trọng (Xanh dương WESET, Trắng, Vàng Gold)"
-  },
+    },
 
   /**
    * Ambient Audio Configuration
@@ -210,22 +208,7 @@ function initializeGuestData() {
   if (DOM.inputGuestName) DOM.inputGuestName.value = name;
   if (DOM.inputAttendanceStatus) DOM.inputAttendanceStatus.value = state.selectedAttendance;
 
-  // Setup Check-in QR code drawer toggle
-  if (DOM.btnShowQr && DOM.ticketQrDrawer) {
-    DOM.btnShowQr.addEventListener("click", () => {
-      const isHidden = DOM.ticketQrDrawer.classList.contains("hidden");
-      if (isHidden) {
-        if (DOM.qrCodeImage && !DOM.qrCodeImage.src) {
-          DOM.qrCodeImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=160x160&color=1e3a8a&data=${encodeURIComponent(id)}`;
-        }
-        DOM.ticketQrDrawer.classList.remove("hidden");
-        DOM.btnShowQr.textContent = "▲ Thu gọn mã QR";
-      } else {
-        DOM.ticketQrDrawer.classList.add("hidden");
-        DOM.btnShowQr.textContent = "🎟️ Xem mã QR Check-in";
-      }
-    });
-  }
+    }
 }
 
 /**
@@ -498,7 +481,7 @@ function setupRsvpForm() {
       enableFormInputs();
       if (DOM.submittedBanner) DOM.submittedBanner.classList.add("hidden");
       if (DOM.rsvpForm) DOM.rsvpForm.classList.remove("hidden");
-      showToast("Bạn có thể cập nhật lại phản hồi của mình.", "info");
+      showToast("Anh/Chị vẫn có thể thay đổi và xác nhận lại.", "info");
     });
   }
 
@@ -605,7 +588,7 @@ function onSubmissionSuccess(data) {
   disableFormInputs();
   renderSubmittedBanner(data);
   openConfirmationModal(data);
-  showToast("Cảm ơn bạn đã xác nhận phản hồi!", "success");
+  showToast("Cảm ơn Anh/Chị đã xác nhận phản hồi!", "success");
 }
 
 /**
@@ -664,8 +647,8 @@ function renderSubmittedBanner(data) {
 
   if (DOM.submittedSummary) {
     DOM.submittedSummary.innerHTML = isAttending
-      ? `Cảm ơn <strong>${escapeHtml(data.guestName)}</strong>! Chúng tôi rất vinh hạnh được đón tiếp bạn tại Lễ Kỷ Niệm 20/11.`
-      : `Cảm ơn <strong>${escapeHtml(data.guestName)}</strong> đã phản hồi. Chúng tôi rất tiếc vì bạn không thể tham dự lần này.`;
+      ? `Cảm ơn <strong>${escapeHtml(data.guestName)}</strong>! Chúng tôi rất vinh hạnh được đón tiếp Anh/Chị tại Lễ Kỷ Niệm 20/11.`
+      : `Cảm ơn <strong>${escapeHtml(data.guestName)}</strong> đã phản hồi. Chúng tôi rất tiếc vì Anh/Chị không thể tham dự lần này.`;
   }
 
   DOM.submittedBanner.classList.remove("hidden");
