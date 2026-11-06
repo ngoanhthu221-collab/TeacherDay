@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Thư Mời 20/11 - NURTURER | WESET English Center</title>
+  
+  <!-- SEO & OpenGraph Meta Tags for Bulk Email & Social Sharing -->
+  <meta name="description" content="NURTURER: Ươm mầm tri thức - Vươn tầm tương lai. Thư mời tham dự Lễ Kỷ Niệm Ngày Nhà Giáo Việt Nam 20/11 - WESET English Center.">
+  <meta name="theme-color" content="#1d4ed8">
+  
+  <!-- OpenGraph / Facebook / Zalo -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yourusername.github.io/InviteTicketWebApp/">
+  <meta property="og:title" content="Thư Mời 20/11 - NURTURER | WESET English Center">
+  <meta property="og:description" content="Ươm mầm tri thức - Vươn tầm tương lai. Kính mời Quý Thầy Cô & Quý Khách xác nhận RSVP trực tuyến.">
+  <meta property="og:image" content="img/KEY VISUAL 2011.png">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Thư Mời 20/11 - NURTURER | WESET English Center">
+  <meta name="twitter:description" content="Ươm mầm tri thức - Vươn tầm tương lai. Kính mời Quý Thầy Cô & Quý Khách xác nhận RSVP trực tuyến.">
+  <meta name="twitter:image" content="img/KEY VISUAL 2011.png">
+
+  <!-- Google Fonts: Playfair Display (Serif Elegance) & Plus Jakarta Sans (Clean Modern) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Floating Ambient Particles Background -->
+  <div class="ambient-glow bg-glow-1" aria-hidden="true"></div>
+  <div class="ambient-glow bg-glow-2" aria-hidden="true"></div>
+  <div class="stars-pattern" aria-hidden="true"></div>
+
+  <!-- Floating Audio Toggle Button -->
+  <button id="audio-toggle-btn" class="audio-control" aria-label="Bật/Tắt âm nhạc nền" title="Bật/Tắt âm nhạc nền">
+    <div class="disc-icon-wrapper">
+      <span class="disc-vinyl"></span>
+      <span class="music-note">♪</span>
+    </div>
+    <div class="sound-wave" aria-hidden="true">
+      <span class="bar bar-1"></span>
+      <span class="bar bar-2"></span>
+      <span class="bar bar-3"></span>
+      <span class="bar bar-4"></span>
+    </div>
+    <span class="audio-tooltip" id="audio-tooltip">Âm nhạc</span>
+  </button>
+
+  <!-- Background Music Audio Element -->
+  <audio id="bg-audio" preload="auto" loop></audio>
+
+  <!-- Main Container -->
+  <main class="invitation-wrapper">
+    
+    <!-- Top Ornamental Monogram / Logo -->
+    <header class="header-ornament">
+      <div class="seal-badge">
+        <svg class="seal-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="46" stroke="currentColor" stroke-width="2" stroke-dasharray="4 2"/>
+          <circle cx="50" cy="50" r="41" stroke="currentColor" stroke-width="1"/>
+          <path d="M50 18L58 35L77 38L63 52L66 71L50 62L34 71L37 52L23 38L42 35L50 18Z" fill="currentColor" opacity="0.85"/>
+        </svg>
+      </div>
+      <p class="eyebrow-text">EXCLUSIVE INVITATION</p>
+    </header>
+
+    <!-- Invitation Card -->
+    <article class="invitation-card" id="invitation-card">
+      <div class="card-border-ornament" aria-hidden="true"></div>
+
+      <!-- Key Visual Artwork Banner -->
+      <div class="card-hero-banner">
+        <img src="img/KEY VISUAL 2011.png" alt="WESET 20/11 NURTURER - Ươm mầm tri thức, Vươn tầm tương lai" class="hero-banner-img" loading="eager">
+      </div>
+      
+      <!-- Card Header -->
+      <section class="card-hero">
+        <span class="invitation-tag">THƯ MỜI TRÂN TRỌNG • 20/11</span>
+        <h1 class="event-title" id="event-title">NURTURER 2026</h1>
+        <p class="event-subtitle" id="event-subtitle">"Ươm mầm tri thức — Vươn tầm tương lai"</p>
+
+        <!-- Dynamic Guest Name Banner (Parsed from URL) -->
+        <div class="guest-salutation-box" id="guest-salutation-box">
+          <div class="salutation-prefix">Trân trọng kính mời Quý Thầy Cô & Quý Khách:</div>
+          <h2 class="guest-name-display" id="guest-name-display">Quý Thầy Cô & Khách Quý</h2>
+          <div class="guest-ticket-badge" id="guest-ticket-badge">
+            <span class="badge-dot"></span>
+            <span class="ticket-code" id="guest-id-display">Mã khách mời: VIP-GUEST</span>
+          </div>
+          <div class="qr-toggle-wrapper">
+            <button type="button" id="btn-show-qr" class="btn-ticket-qr">
+              🎟️ Xem mã QR Check-in
+            </button>
+          </div>
+          <div id="ticket-qr-drawer" class="ticket-qr-drawer hidden">
+            <img id="qr-code-image" src="" alt="Mã QR Check-in" class="qr-code-img">
+            <span class="qr-hint">Xuất trình mã này tại bàn đón tiếp để check-in nhanh</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Countdown Timer Section -->
+      <section class="countdown-section" aria-label="Đếm ngược đến sự kiện">
+        <h3 class="section-micro-heading">SỰ KIỆN SẼ DIỄN RA TRONG</h3>
+        <div class="countdown-grid" id="countdown-grid">
+          <div class="countdown-item">
+            <span class="countdown-number" id="cd-days">00</span>
+            <span class="countdown-label">Ngày</span>
+          </div>
+          <div class="countdown-divider">:</div>
+          <div class="countdown-item">
+            <span class="countdown-number" id="cd-hours">00</span>
+            <span class="countdown-label">Giờ</span>
+          </div>
+          <div class="countdown-divider">:</div>
+          <div class="countdown-item">
+            <span class="countdown-number" id="cd-minutes">00</span>
+            <span class="countdown-label">Phút</span>
+          </div>
+          <div class="countdown-divider">:</div>
+          <div class="countdown-item">
+            <span class="countdown-number" id="cd-seconds">00</span>
+            <span class="countdown-label">Giây</span>
+          </div>
+        </div>
+      </section>
+
+      <div class="divider-gold" aria-hidden="true">
+        <span class="divider-diamond">♦</span>
+      </div>
+
+      <!-- Event Logistics Details -->
+      <section class="event-details-section">
+        <div class="detail-row">
+          <div class="detail-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+          </div>
+          <div class="detail-content">
+            <span class="detail-label">Thời gian</span>
+            <strong class="detail-value" id="event-date">Thứ Sáu, ngày 20 tháng 11 năm 2026</strong>
+            <span class="detail-sub" id="event-time">Đón khách: 17:30 | Khai tiệc: 18:30</span>
+          </div>
+        </div>
+
+        <div class="detail-row">
+          <div class="detail-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+          </div>
+          <div class="detail-content">
+            <span class="detail-label">Địa điểm tổ chức</span>
+            <strong class="detail-value" id="event-venue">Grand Ballroom • Khách sạn Sheraton Saigon</strong>
+            <span class="detail-sub" id="event-address">88 Đồng Khởi, Phường Bến Nghé, Quận 1, TP. Hồ Chí Minh</span>
+          </div>
+        </div>
+
+        <div class="detail-row">
+          <div class="detail-icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"></path>
+            </svg>
+          </div>
+          <div class="detail-content">
+            <span class="detail-label">Trang phục (Dress Code)</span>
+            <strong class="detail-value" id="event-dresscode">Lịch sự / Trang trọng</strong>
+            <span class="detail-sub">Tông màu gợi ý: Xanh dương WESET, Trắng, Vàng Gold</span>
+          </div>
+        </div>
+
+        <!-- Action Links: Google Maps & Add to Calendar -->
+        <div class="action-links-grid">
+          <a href="#" id="btn-map" target="_blank" rel="noopener noreferrer" class="link-btn link-btn-outline">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="btn-icon">
+              <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon>
+              <line x1="8" y1="2" x2="8" y2="18"></line>
+              <line x1="16" y1="6" x2="16" y2="22"></line>
+            </svg>
+            Xem bản đồ
+          </a>
+          <button type="button" id="btn-calendar" class="link-btn link-btn-outline">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="btn-icon">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+              <line x1="12" y1="14" x2="12" y2="18"></line>
+              <line x1="10" y1="16" x2="14" y2="16"></line>
+            </svg>
+            Lưu vào lịch
+          </button>
+        </div>
+      </section>
+
+      <div class="divider-gold" aria-hidden="true">
+        <span class="divider-diamond">♦</span>
+      </div>
+
+      <!-- ==================== RSVP SECTION ==================== -->
+      <section class="rsvp-section" id="rsvp-container">
+        <div class="rsvp-header">
+          <span class="rsvp-eyebrow">PHẢN HỒI THAM DỰ</span>
+          <h3 class="rsvp-title">Xác Nhận Tham Gia</h3>
+          <p class="rsvp-subtitle">
+            Sự hiện diện của Quý Thầy Cô & Quý Khách là niềm vinh hạnh to lớn cho chúng tôi. Xin vui lòng phản hồi trước ngày <strong id="rsvp-deadline">17/11/2026</strong>.
+          </p>
+        </div>
+
+        <!-- RSVP Form (Headless Google Form Integration) -->
+        <form id="rsvp-form" class="rsvp-form" novalidate>
+          
+          <!-- Hidden inputs automatically populated from URL query params -->
+          <input type="hidden" id="input-guest-id" name="guest_id" value="">
+          <input type="hidden" id="input-guest-name" name="guest_name" value="">
+          <input type="hidden" id="input-attendance-status" name="attendance_status" value="">
+
+          <!-- Read-only Guest Identification Preview in Form -->
+          <div class="form-guest-preview" id="form-guest-preview">
+            <div class="preview-avatar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </div>
+            <div class="preview-meta">
+              <span class="preview-label">Khách mời xác nhận:</span>
+              <span class="preview-name" id="preview-guest-name">Quý Thầy Cô & Khách Quý</span>
+              <span class="preview-id" id="preview-guest-id">(Mã: VIP-GUEST)</span>
+            </div>
+          </div>
+
+          <!-- Optional Manual Name Input (Shown only when opened without ?name= parameter) -->
+          <div class="form-group hidden" id="group-manual-name" style="margin-bottom: 16px;">
+            <label for="input-manual-name" class="form-label">
+              <span>Họ và tên Quý khách:</span>
+              <span class="label-hint">(Vui lòng nhập tên)</span>
+            </label>
+            <input type="text" id="input-manual-name" class="form-control" placeholder="Ví dụ: Nguyễn Văn An" maxlength="100">
+          </div>
+
+          <!-- Quick One-Tap Action Buttons -->
+          <div class="quick-rsvp-group">
+            <button 
+              type="button" 
+              id="btn-rsvp-accept" 
+              class="rsvp-btn rsvp-btn-accept" 
+              data-attendance="Tham gia">
+              <span class="btn-spinner" aria-hidden="true"></span>
+              <span class="btn-content">
+                <svg class="btn-rsvp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+                <span class="btn-main-text">Xác nhận tham gia</span>
+                <span class="btn-sub-text">Hẹn gặp bạn tại dạ tiệc</span>
+              </span>
+            </button>
+
+            <button 
+              type="button" 
+              id="btn-rsvp-decline" 
+              class="rsvp-btn rsvp-btn-decline" 
+              data-attendance="Không thể tham gia">
+              <span class="btn-spinner" aria-hidden="true"></span>
+              <span class="btn-content">
+                <svg class="btn-rsvp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="15" y1="9" x2="9" y2="15"></line>
+                  <line x1="9" y1="9" x2="15" y2="15"></line>
+                </svg>
+                <span class="btn-main-text">Tiếc quá, không thể tham gia</span>
+                <span class="btn-sub-text">Gửi lời chúc mừng đến BTC</span>
+              </span>
+            </button>
+          </div>
+
+          <!-- Optional Fields Container -->
+          <div class="optional-fields-wrapper" id="optional-fields">
+            
+            <!-- Ghi chú (Khớp trực tiếp với Google Form) -->
+            <div class="form-group">
+              <label for="textarea-notes" class="form-label">
+                <span>Ghi chú</span>
+                <span class="label-hint">(Tùy chọn: Chế độ ăn uống, lời chúc, yêu cầu đặc biệt...)</span>
+              </label>
+              <textarea 
+                id="textarea-notes" 
+                name="notes" 
+                class="form-control form-textarea" 
+                rows="3" 
+                placeholder="Nhập ghi chú hoặc lời chúc mừng của bạn..."
+                maxlength="500"></textarea>
+              <div class="char-counter"><span id="char-count">0</span>/500</div>
+            </div>
+
+            <!-- Alternative Explicit Submit Button -->
+            <div class="custom-submit-wrapper" id="custom-submit-wrapper">
+              <button type="submit" id="btn-submit-rsvp" class="submit-action-btn">
+                <span class="btn-spinner" aria-hidden="true"></span>
+                <span class="btn-text">Gửi Xác Nhận Phản Hồi</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Loading & Submission Feedback Area -->
+          <div id="form-feedback" class="form-feedback" role="alert" aria-live="polite"></div>
+        </form>
+
+        <!-- Post-Submission Confirmed Card (Shown after submitting or if already responded) -->
+        <div id="rsvp-submitted-banner" class="submitted-banner hidden">
+          <div class="submitted-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+          </div>
+          <h4 class="submitted-title" id="submitted-title">Bạn Đã Phản Hồi RSVP</h4>
+          <p class="submitted-text" id="submitted-summary">Cảm ơn bạn đã phản hồi. Chúng tôi đã ghi nhận thông tin tham dự của bạn.</p>
+          <button type="button" id="btn-re-edit" class="btn-re-edit">
+            Thay đổi lựa chọn phản hồi
+          </button>
+        </div>
+
+      </section>
+
+      <!-- Footer / Gratitude -->
+      <footer class="card-footer">
+        <p class="host-line">Trân trọng cảm ơn,</p>
+        <p class="host-signature" id="event-host">WESET English Center</p>
+        <p class="hotline-help">Hỗ trợ khách mời: <a href="tel:02838383838" class="hotline-link">028.3838.3838</a></p>
+      </footer>
+
+    </article>
+  </main>
+
+  <!-- ==================== CONFIRMATION MODAL ==================== -->
+  <div id="confirmation-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-dialog">
+      <div class="modal-card">
+        <button type="button" class="modal-close-btn" id="modal-close-btn" aria-label="Đóng cửa sổ">&times;</button>
+        
+        <div class="modal-badge-wrapper">
+          <div class="modal-success-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </div>
+        </div>
+
+        <h3 class="modal-title" id="modal-title">Cảm Ơn Bạn Đã Xác Nhận!</h3>
+        <p class="modal-guest-line" id="modal-guest-name">Kính gửi Quý Khách,</p>
+        
+        <div class="modal-status-box" id="modal-status-box">
+          <!-- Filled dynamically by script.js -->
+        </div>
+
+        <p class="modal-closing-note">
+          Thông tin phản hồi của bạn đã được chuyển tới Ban Tổ Chức. Chúc bạn một ngày tuyệt vời và hẹn gặp lại trong sự kiện!
+        </p>
+
+        <div class="modal-actions">
+          <button type="button" class="modal-btn modal-btn-primary" id="modal-btn-calendar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="modal-btn-icon">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            Lưu vào Lịch Nhắc
+          </button>
+          <button type="button" class="modal-btn modal-btn-secondary" id="modal-btn-done">
+            Đã hiểu & Hoàn tất
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+  <!-- Application Logic -->
+  <script src="script.js"></script>
+</body>
+</html>
+

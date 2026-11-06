@@ -1,0 +1,1443 @@
+/* ==========================================================================
+   WESET 20/11 "NURTURER" INVITATION & RSVP STYLESHEET
+   Aesthetic: Ethereal Luminous Sky Blue, Sunlight Gold & Elegant Glassmorphism
+   Designed to seamlessly blend with img/KEY VISUAL 2011.png
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. CSS Custom Properties / Design Tokens
+   -------------------------------------------------------------------------- */
+:root {
+  /* Brand Colors from Key Visual */
+  --weset-blue: #1d4ed8;
+  --weset-blue-dark: #1e3a8a;
+  --weset-blue-light: #60a5fa;
+  --weset-sky: #0284c7;
+  --weset-sky-light: #e0f2fe;
+
+  /* Radiant Sunlight Gold */
+  --gold-primary: #d97706;
+  --gold-light: #fbbf24;
+  --gold-dark: #b45309;
+  --gold-accent: #f59e0b;
+  --gold-glow: rgba(245, 158, 11, 0.35);
+  --gold-gradient: linear-gradient(135deg, #f59e0b 0%, #d97706 50%, #b45309 100%);
+  --blue-gradient: linear-gradient(135deg, #1d4ed8 0%, #0284c7 100%);
+  --royal-gradient: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 50%, #0369a1 100%);
+
+  /* Backgrounds & Glassmorphism Surfaces */
+  --bg-overlay: rgba(240, 246, 255, 0.55);
+  --card-bg: rgba(255, 255, 255, 0.90);
+  --card-border: rgba(212, 175, 55, 0.45);
+  --card-border-inner: rgba(29, 78, 216, 0.15);
+  --surface-row: rgba(255, 255, 255, 0.85);
+  --surface-row-border: rgba(226, 232, 240, 0.9);
+  
+  /* Form Inputs */
+  --input-bg: #ffffff;
+  --input-border: #cbd5e1;
+  --input-focus-border: #2563eb;
+  --input-focus-glow: rgba(37, 99, 235, 0.18);
+
+  /* Typography Colors (High-Contrast Slate on Luminous Glass) */
+  --text-main: #0f172a;       /* Slate 900 */
+  --text-body: #334155;       /* Slate 700 */
+  --text-muted: #64748b;      /* Slate 500 */
+  --text-light: #ffffff;
+  --text-gold: #b45309;
+
+  /* State Colors */
+  --color-success: #059669;
+  --color-success-bg: rgba(16, 185, 129, 0.12);
+  --color-success-border: rgba(16, 185, 129, 0.4);
+  --color-decline: #e11d48;
+  --color-decline-bg: rgba(244, 63, 94, 0.08);
+  --color-decline-border: rgba(244, 63, 94, 0.35);
+
+  /* Typography */
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* Radii & Shadows */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+  --shadow-card: 0 25px 60px -10px rgba(15, 23, 42, 0.22), 0 0 35px rgba(212, 175, 55, 0.25);
+  --shadow-soft: 0 8px 24px -4px rgba(15, 23, 42, 0.08);
+  --shadow-btn: 0 8px 20px -4px rgba(217, 119, 6, 0.35);
+
+  /* Transitions */
+  --transition-fast: 0.18s ease;
+  --transition-normal: 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --------------------------------------------------------------------------
+   2. Base Reset & Fixed Background Setup
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--text-main);
+  min-height: 100vh;
+  line-height: 1.6;
+  overflow-x: hidden;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Fixed Fullscreen Background Image with Smooth Parallax */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url('img/KEY VISUAL 2011.png');
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: -2;
+  transform: translateZ(0); /* Hardware Acceleration */
+}
+
+/* Atmospheric Sun-Ray & Sky Tint Gradient Overlay */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(240, 246, 255, 0.35) 0%,
+    rgba(240, 246, 255, 0.55) 40%,
+    rgba(235, 243, 255, 0.82) 100%
+  );
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Ambient Floating Particles */
+.ambient-glow {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.45;
+  animation: pulse-glow 9s ease-in-out infinite alternate;
+}
+
+.bg-glow-1 {
+  width: 380px;
+  height: 380px;
+  top: -60px;
+  right: -80px;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.35) 0%, rgba(245, 158, 11, 0) 70%);
+}
+
+.bg-glow-2 {
+  width: 420px;
+  height: 420px;
+  bottom: 60px;
+  left: -120px;
+  background: radial-gradient(circle, rgba(29, 78, 216, 0.25) 0%, rgba(2, 132, 199, 0) 70%);
+}
+
+.stars-pattern {
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(rgba(217, 119, 6, 0.12) 1px, transparent 1px);
+  background-size: 36px 36px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+}
+
+@keyframes pulse-glow {
+  0% { transform: scale(1) translate(0, 0); opacity: 0.35; }
+  100% { transform: scale(1.15) translate(15px, 20px); opacity: 0.55; }
+}
+
+/* --------------------------------------------------------------------------
+   3. Floating Audio Toggle Controller
+   -------------------------------------------------------------------------- */
+.audio-control {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1.5px solid var(--card-border);
+  border-radius: var(--radius-full);
+  color: var(--weset-blue);
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(15, 23, 42, 0.15);
+  transition: all var(--transition-normal);
+}
+
+.audio-control:hover {
+  transform: translateY(-2px);
+  background: #ffffff;
+  border-color: var(--gold-primary);
+  box-shadow: 0 6px 22px rgba(29, 78, 216, 0.2);
+}
+
+.disc-icon-wrapper {
+  position: relative;
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+}
+
+.disc-vinyl {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px dashed var(--gold-primary);
+  background: radial-gradient(circle, var(--gold-primary) 20%, #1e3a8a 25%, #0284c7 100%);
+  transition: transform 0.5s ease;
+}
+
+.audio-control.is-playing .disc-vinyl {
+  animation: spin 3.5s linear infinite;
+}
+
+.music-note {
+  position: absolute;
+  font-size: 11px;
+  color: #ffffff;
+  font-weight: 700;
+  pointer-events: none;
+}
+
+.sound-wave {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 14px;
+}
+
+.sound-wave .bar {
+  width: 3px;
+  height: 4px;
+  background-color: var(--weset-blue);
+  border-radius: 2px;
+  transition: height 0.2s ease;
+}
+
+.audio-control.is-playing .sound-wave .bar-1 { animation: wave 1.1s ease-in-out infinite alternate; }
+.audio-control.is-playing .sound-wave .bar-2 { animation: wave 0.8s ease-in-out infinite alternate 0.2s; }
+.audio-control.is-playing .sound-wave .bar-3 { animation: wave 1.3s ease-in-out infinite alternate 0.4s; }
+.audio-control.is-playing .sound-wave .bar-4 { animation: wave 0.9s ease-in-out infinite alternate 0.1s; }
+
+.audio-tooltip {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--weset-blue);
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes wave {
+  0% { height: 4px; }
+  100% { height: 14px; }
+}
+
+/* --------------------------------------------------------------------------
+   4. Main Invitation Container & Header Ornament
+   -------------------------------------------------------------------------- */
+.invitation-wrapper {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 580px;
+  margin: 0 auto;
+  padding: 24px 16px 60px 16px;
+}
+
+.header-ornament {
+  text-align: center;
+  margin-bottom: 14px;
+  padding-top: 10px;
+}
+
+.seal-badge {
+  display: inline-block;
+  width: 52px;
+  height: 52px;
+  color: var(--gold-primary);
+  filter: drop-shadow(0 2px 8px var(--gold-glow));
+}
+
+.seal-icon {
+  width: 100%;
+  height: 100%;
+}
+
+.eyebrow-text {
+  font-size: 0.72rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--weset-blue-dark);
+  font-weight: 700;
+  margin-top: 6px;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+/* --------------------------------------------------------------------------
+   5. Invitation Card (Luminous Glassmorphism)
+   -------------------------------------------------------------------------- */
+.invitation-card {
+  position: relative;
+  background: var(--card-bg);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border-radius: var(--radius-lg);
+  border: 1.5px solid var(--card-border);
+  box-shadow: var(--shadow-card);
+  padding: 28px 20px;
+  overflow: hidden;
+}
+
+/* Inner Gold Accent Line */
+.card-border-ornament {
+  position: absolute;
+  inset: 6px;
+  border: 1px solid var(--card-border-inner);
+  border-radius: calc(var(--radius-lg) - 6px);
+  pointer-events: none;
+}
+
+/* Hero Key Visual Banner inside Card */
+.card-hero-banner {
+  margin: -10px -10px 18px -10px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(29, 78, 216, 0.15);
+  border: 1.5px solid rgba(212, 175, 55, 0.35);
+}
+
+.hero-banner-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.card-hero-banner:hover .hero-banner-img {
+  transform: scale(1.02);
+}
+
+/* --------------------------------------------------------------------------
+   6. Card Hero Section & Personalized Greeting
+   -------------------------------------------------------------------------- */
+.card-hero {
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.invitation-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--weset-blue);
+  border: 1px solid rgba(29, 78, 216, 0.25);
+  padding: 4px 14px;
+  border-radius: var(--radius-full);
+  background: rgba(224, 242, 254, 0.75);
+  margin-bottom: 12px;
+}
+
+.event-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.75rem, 5vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--weset-blue-dark);
+  margin-bottom: 6px;
+  letter-spacing: -0.3px;
+}
+
+.event-subtitle {
+  font-size: 0.92rem;
+  color: var(--text-body);
+  font-weight: 500;
+  max-width: 460px;
+  margin: 0 auto 18px auto;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+/* Guest Personalization Salutation Box (Royal Blue & Gold Gradient) */
+.guest-salutation-box {
+  background: var(--royal-gradient);
+  border: 1.5px solid var(--gold-light);
+  border-radius: var(--radius-md);
+  padding: 16px 14px;
+  margin-top: 10px;
+  position: relative;
+  box-shadow: 0 10px 25px rgba(30, 58, 138, 0.28), 0 0 20px var(--gold-glow);
+  color: #ffffff;
+}
+
+.salutation-prefix {
+  font-size: 0.8rem;
+  color: #bfdbfe; /* Light Sky */
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 600;
+}
+
+.guest-name-display {
+  font-family: var(--font-serif);
+  font-size: clamp(1.4rem, 4.5vw, 1.85rem);
+  font-weight: 700;
+  color: #ffffff;
+  margin: 4px 0 6px 0;
+  letter-spacing: 0.3px;
+  word-break: break-word;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.guest-ticket-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(251, 191, 36, 0.5);
+  padding: 3px 12px;
+  border-radius: var(--radius-full);
+}
+
+.badge-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--gold-light);
+  box-shadow: 0 0 8px var(--gold-light);
+}
+
+.ticket-code {
+  font-size: 0.75rem;
+  font-family: monospace;
+  color: #fef08a; /* Warm light yellow */
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+.qr-toggle-wrapper {
+  margin-top: 10px;
+}
+
+.btn-ticket-qr {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px dashed rgba(251, 191, 36, 0.6);
+  color: #ffffff;
+  font-size: 0.76rem;
+  font-weight: 600;
+  padding: 5px 14px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-ticket-qr:hover {
+  background: rgba(255, 255, 255, 0.28);
+  border-color: var(--gold-light);
+}
+
+.ticket-qr-drawer {
+  margin-top: 12px;
+  padding: 14px;
+  background: #ffffff;
+  border-radius: var(--radius-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeIn 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.qr-code-img {
+  width: 140px;
+  height: 140px;
+  display: block;
+}
+
+.qr-hint {
+  font-size: 0.75rem;
+  color: #64748b;
+  margin-top: 8px;
+  text-align: center;
+}
+
+/* --------------------------------------------------------------------------
+   7. Countdown Section
+   -------------------------------------------------------------------------- */
+.countdown-section {
+  text-align: center;
+  margin: 22px 0;
+}
+
+.section-micro-heading {
+  font-size: 0.72rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--weset-blue);
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.countdown-grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.countdown-item {
+  background: #ffffff;
+  border: 1.5px solid rgba(217, 119, 6, 0.35);
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+  min-width: 58px;
+  text-align: center;
+  box-shadow: 0 4px 14px rgba(29, 78, 216, 0.08);
+}
+
+.countdown-number {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--weset-blue-dark);
+  line-height: 1.1;
+}
+
+.countdown-label {
+  display: block;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+  margin-top: 2px;
+  font-weight: 600;
+}
+
+.countdown-divider {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--gold-primary);
+}
+
+/* Ornamental Divider */
+.divider-gold {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 24px 0;
+  position: relative;
+}
+
+.divider-gold::before,
+.divider-gold::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(217, 119, 6, 0.4), transparent);
+}
+
+.divider-diamond {
+  color: var(--gold-primary);
+  padding: 0 10px;
+  font-size: 0.8rem;
+}
+
+/* --------------------------------------------------------------------------
+   8. Event Details Section
+   -------------------------------------------------------------------------- */
+.event-details-section {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.detail-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 12px 14px;
+  background: var(--surface-row);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--surface-row-border);
+  box-shadow: var(--shadow-soft);
+}
+
+.detail-icon-box {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(135deg, rgba(29, 78, 216, 0.12) 0%, rgba(2, 132, 199, 0.16) 100%);
+  color: var(--weset-blue);
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(29, 78, 216, 0.2);
+}
+
+.detail-icon-box svg {
+  width: 20px;
+  height: 20px;
+}
+
+.detail-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--gold-primary);
+  font-weight: 700;
+}
+
+.detail-value {
+  font-size: 0.95rem;
+  color: var(--text-main);
+  font-weight: 700;
+  margin-top: 1px;
+}
+
+.detail-sub {
+  font-size: 0.83rem;
+  color: var(--text-body);
+  margin-top: 2px;
+}
+
+/* Action Links: Map & Calendar */
+.action-links-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.link-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  border: 1.5px solid rgba(29, 78, 216, 0.25);
+  background: #ffffff;
+  color: var(--weset-blue);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
+}
+
+.link-btn:hover {
+  background: var(--weset-sky-light);
+  border-color: var(--weset-blue);
+  transform: translateY(-1px);
+}
+
+.link-btn .btn-icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* --------------------------------------------------------------------------
+   9. RSVP Section & Form
+   -------------------------------------------------------------------------- */
+.rsvp-section {
+  position: relative;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1.5px solid var(--card-border);
+  border-radius: var(--radius-md);
+  padding: 22px 18px;
+  margin-top: 10px;
+  box-shadow: var(--shadow-soft);
+}
+
+.rsvp-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.rsvp-eyebrow {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold-primary);
+}
+
+.rsvp-title {
+  font-family: var(--font-serif);
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: var(--weset-blue-dark);
+  margin: 4px 0 6px 0;
+}
+
+.rsvp-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-body);
+  line-height: 1.45;
+}
+
+.rsvp-subtitle strong {
+  color: var(--gold-dark);
+}
+
+/* Guest Preview Row inside RSVP */
+.form-guest-preview {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  margin-bottom: 18px;
+}
+
+.preview-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(29, 78, 216, 0.12);
+  color: var(--weset-blue);
+  display: grid;
+  place-items: center;
+}
+
+.preview-avatar svg {
+  width: 18px;
+  height: 18px;
+}
+
+.preview-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px;
+  font-size: 0.85rem;
+}
+
+.preview-label {
+  color: var(--text-muted);
+}
+
+.preview-name {
+  font-weight: 700;
+  color: var(--weset-blue-dark);
+}
+
+.preview-id {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-family: monospace;
+}
+
+/* Quick One-Tap RSVP Buttons */
+.quick-rsvp-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.rsvp-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 58px;
+  padding: 12px 18px;
+  border-radius: var(--radius-md);
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  text-align: left;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.rsvp-btn:hover {
+  transform: translateY(-2px);
+}
+
+.rsvp-btn:active {
+  transform: scale(0.985);
+}
+
+.rsvp-btn .btn-content {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 12px;
+  align-items: center;
+  width: 100%;
+}
+
+.btn-rsvp-icon {
+  grid-row: 1 / span 2;
+  width: 26px;
+  height: 26px;
+}
+
+.btn-main-text {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  line-height: 1.2;
+}
+
+.btn-sub-text {
+  font-size: 0.76rem;
+  opacity: 0.85;
+  margin-top: 2px;
+}
+
+/* Accept Button (Emerald Green & Gold Gradient) */
+.rsvp-btn-accept {
+  background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+  border-color: #059669;
+  color: #ffffff;
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.28);
+}
+
+.rsvp-btn-accept:hover {
+  background: linear-gradient(135deg, #047857 0%, #059669 100%);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.38);
+}
+
+.rsvp-btn-accept.is-selected {
+  background: linear-gradient(135deg, #047857 0%, #065f46 100%);
+  border-color: #34d399;
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.45);
+}
+
+/* Decline Button */
+.rsvp-btn-decline {
+  background: #ffffff;
+  border-color: rgba(244, 63, 94, 0.4);
+  color: #e11d48;
+  box-shadow: 0 2px 8px rgba(244, 63, 94, 0.08);
+}
+
+.rsvp-btn-decline:hover {
+  background: rgba(244, 63, 94, 0.08);
+  border-color: var(--color-decline);
+}
+
+.rsvp-btn-decline.is-selected {
+  background: #f43f5e;
+  border-color: #e11d48;
+  color: #ffffff;
+  box-shadow: 0 6px 20px rgba(244, 63, 94, 0.25);
+}
+
+/* Disabled & Loading Button States */
+.rsvp-btn:disabled,
+.submit-action-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* Spinner */
+.btn-spinner {
+  display: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-right: 8px;
+}
+
+.rsvp-btn.is-loading .btn-spinner,
+.submit-action-btn.is-loading .btn-spinner {
+  display: inline-block;
+}
+
+.rsvp-btn.is-loading .btn-rsvp-icon,
+.submit-action-btn.is-loading .btn-text {
+  display: none;
+}
+
+/* Form Inputs */
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 0.83rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 6px;
+}
+
+.label-hint {
+  font-size: 0.73rem;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.select-wrapper {
+  position: relative;
+}
+
+.form-control {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 16px; /* 16px prevents iOS Safari from auto-zooming on focus */
+  font-family: var(--font-sans);
+  color: var(--text-main);
+  background: var(--input-bg);
+  border: 1.5px solid var(--input-border);
+  border-radius: var(--radius-sm);
+  outline: none;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.form-control:focus {
+  border-color: var(--input-focus-border);
+  box-shadow: 0 0 0 3px var(--input-focus-glow);
+}
+
+.form-select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 36px;
+  cursor: pointer;
+}
+
+.form-select option {
+  background-color: #ffffff;
+  color: var(--text-main);
+}
+
+.select-chevron {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.65rem;
+  color: var(--weset-blue);
+  pointer-events: none;
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.char-counter {
+  text-align: right;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* Explicit Custom Submit Button */
+.custom-submit-wrapper {
+  margin-top: 14px;
+}
+
+.submit-action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 20px;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffffff;
+  background: var(--royal-gradient);
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(30, 58, 138, 0.25);
+  transition: all var(--transition-fast);
+}
+
+.submit-action-btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.1);
+  box-shadow: 0 6px 20px rgba(30, 58, 138, 0.35);
+}
+
+.submit-action-btn:active {
+  transform: scale(0.985);
+}
+
+/* Form Feedback Area */
+.form-feedback {
+  margin-top: 12px;
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  border-radius: var(--radius-sm);
+  display: none;
+  text-align: center;
+}
+
+.form-feedback.is-visible {
+  display: block;
+}
+
+.form-feedback.is-error {
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #b91c1c;
+}
+
+.form-feedback.is-success {
+  background: var(--color-success-bg);
+  border: 1px solid var(--color-success-border);
+  color: var(--color-success);
+}
+
+/* Post-Submission Banner */
+.submitted-banner {
+  text-align: center;
+  padding: 24px 16px;
+  background: rgba(16, 185, 129, 0.08);
+  border: 1.5px solid rgba(16, 185, 129, 0.35);
+  border-radius: var(--radius-md);
+  margin-top: 10px;
+  animation: fadeIn 0.4s ease;
+}
+
+.submitted-icon {
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 12px auto;
+  border-radius: 50%;
+  background: #10b981;
+  color: #ffffff;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.35);
+}
+
+.submitted-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.submitted-title {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--weset-blue-dark);
+  margin-bottom: 6px;
+}
+
+.submitted-text {
+  font-size: 0.9rem;
+  color: var(--text-body);
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+.btn-re-edit {
+  background: #ffffff;
+  border: 1px dashed var(--weset-blue);
+  color: var(--weset-blue);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 7px 16px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-re-edit:hover {
+  background: var(--weset-sky-light);
+}
+
+/* --------------------------------------------------------------------------
+   10. Card Footer
+   -------------------------------------------------------------------------- */
+.card-footer {
+  text-align: center;
+  margin-top: 26px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.host-line {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.host-signature {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  color: var(--weset-blue-dark);
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+.hotline-help {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 10px;
+}
+
+.hotline-link {
+  color: var(--weset-blue);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.hotline-link:hover {
+  text-decoration: underline;
+}
+
+/* --------------------------------------------------------------------------
+   11. Confirmation Modal (Luminous Elegance)
+   -------------------------------------------------------------------------- */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-backdrop.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.modal-dialog {
+  width: 100%;
+  max-width: 440px;
+  transform: translateY(0);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-backdrop.hidden .modal-dialog {
+  transform: translateY(30px) scale(0.95);
+}
+
+.modal-card {
+  position: relative;
+  background: linear-gradient(165deg, #ffffff 0%, #f0f7ff 100%);
+  border: 1.5px solid var(--gold-light);
+  border-radius: var(--radius-lg);
+  padding: 28px 22px;
+  text-align: center;
+  box-shadow: 0 30px 60px rgba(15, 23, 42, 0.3), 0 0 40px var(--gold-glow);
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  line-height: 1;
+  transition: color var(--transition-fast);
+}
+
+.modal-close-btn:hover {
+  color: var(--text-main);
+}
+
+.modal-badge-wrapper {
+  margin-bottom: 14px;
+}
+
+.modal-success-circle {
+  width: 58px;
+  height: 58px;
+  margin: 0 auto;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+  color: #ffffff;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 0 25px rgba(16, 185, 129, 0.4);
+  animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.modal-success-circle svg {
+  width: 30px;
+  height: 30px;
+}
+
+.modal-title {
+  font-family: var(--font-serif);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--weset-blue-dark);
+  margin-bottom: 4px;
+}
+
+.modal-guest-line {
+  font-size: 0.95rem;
+  color: var(--gold-dark);
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.modal-status-box {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  font-size: 0.86rem;
+  color: var(--text-body);
+  margin-bottom: 14px;
+  text-align: left;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.status-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 3px 0;
+}
+
+.status-label {
+  color: var(--text-muted);
+}
+
+.status-value {
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.modal-closing-note {
+  font-size: 0.82rem;
+  color: var(--text-body);
+  line-height: 1.45;
+  margin-bottom: 20px;
+}
+
+.modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modal-btn {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 16px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all var(--transition-fast);
+  border: none;
+}
+
+.modal-btn-primary {
+  background: var(--royal-gradient);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(30, 58, 138, 0.25);
+}
+
+.modal-btn-primary:hover {
+  filter: brightness(1.1);
+}
+
+.modal-btn-secondary {
+  background: #ffffff;
+  color: var(--text-body);
+  border: 1px solid #cbd5e1;
+}
+
+.modal-btn-secondary:hover {
+  background: #f8fafc;
+  color: var(--text-main);
+}
+
+.modal-btn-icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* --------------------------------------------------------------------------
+   12. Toast Notification
+   -------------------------------------------------------------------------- */
+.toast-container {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1100;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+  width: calc(100% - 32px);
+  max-width: 400px;
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(14px);
+  border: 1.5px solid var(--gold-light);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  color: var(--text-main);
+  font-size: 0.88rem;
+  font-weight: 600;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.18);
+  pointer-events: auto;
+  animation: toastIn 0.35s cubic-bezier(0.16, 1, 0.3, 1), toastOut 0.3s ease 3.7s forwards;
+}
+
+.toast-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--gold-primary);
+  flex-shrink: 0;
+}
+
+.toast.toast-success {
+  border-color: #10b981;
+}
+
+.toast.toast-success .toast-icon {
+  color: #10b981;
+}
+
+.toast.toast-error {
+  border-color: #ef4444;
+}
+
+.toast.toast-error .toast-icon {
+  color: #ef4444;
+}
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateY(20px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes toastOut {
+  to { opacity: 0; transform: translateY(10px) scale(0.95); }
+}
+
+@keyframes popIn {
+  from { transform: scale(0.4); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Helper Utilities */
+.hidden {
+  display: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   13. Responsive Breakpoints & Desktop Enhancement
+   -------------------------------------------------------------------------- */
+@media (min-width: 640px) {
+  .invitation-wrapper {
+    padding-top: 36px;
+  }
+
+  .invitation-card {
+    padding: 36px 32px;
+  }
+
+  .quick-rsvp-group {
+    flex-direction: row;
+  }
+
+  .rsvp-btn {
+    flex: 1;
+    min-height: 72px;
+  }
+
+  .countdown-item {
+    min-width: 68px;
+    padding: 10px 14px;
+  }
+
+  .countdown-number {
+    font-size: 1.75rem;
+  }
+
+  .audio-control {
+    top: 24px;
+    right: 28px;
+  }
+}

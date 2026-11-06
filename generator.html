@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trình Tạo Link Thiệp Mời Hàng Loạt & Xem Trước | Bulk Link Generator</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #0a0f1d;
+      --bg-card: rgba(18, 26, 43, 0.92);
+      --gold-primary: #d4af37;
+      --gold-light: #f6e58d;
+      --text-primary: #f8fafc;
+      --text-muted: #94a3b8;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-sans: 'Plus Jakarta Sans', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: rgba(14, 21, 38, 0.95);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand-title {
+      font-family: var(--font-serif);
+      color: var(--gold-light);
+      font-size: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-title span {
+      font-size: 0.78rem;
+      font-family: var(--font-sans);
+      color: var(--text-muted);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      padding: 2px 8px;
+      border-radius: 999px;
+    }
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 440px;
+      gap: 24px;
+      padding: 24px;
+      flex: 1;
+      max-width: 1440px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    @media (max-width: 960px) {
+      .main-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .panel {
+      background: var(--bg-card);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .panel-header {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 12px;
+    }
+
+    .panel-title {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      color: var(--gold-light);
+    }
+
+    .panel-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--gold-light);
+    }
+
+    input, textarea {
+      width: 100%;
+      background: rgba(10, 15, 29, 0.85);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      color: var(--text-primary);
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      outline: none;
+    }
+
+    input:focus, textarea:focus {
+      border-color: var(--gold-primary);
+      box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+    }
+
+    textarea {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      resize: vertical;
+      min-height: 120px;
+      line-height: 1.5;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      padding: 10px 16px;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-gold {
+      background: linear-gradient(135deg, #f6d365 0%, #d4af37 100%);
+      color: #0c1322;
+    }
+
+    .btn-gold:hover {
+      filter: brightness(1.1);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      color: var(--gold-light);
+    }
+
+    .btn-outline:hover {
+      background: rgba(212, 175, 55, 0.12);
+    }
+
+    .table-container {
+      overflow-x: auto;
+      max-height: 380px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-sm);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+    }
+
+    th {
+      background: rgba(14, 21, 38, 0.95);
+      color: var(--gold-primary);
+      text-align: left;
+      padding: 10px 12px;
+      position: sticky;
+      top: 0;
+      font-weight: 600;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+    }
+
+    td {
+      padding: 8px 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text-primary);
+    }
+
+    tr:hover td {
+      background: rgba(212, 175, 55, 0.05);
+    }
+
+    .url-cell {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: #93c5fd;
+      max-width: 280px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    /* Mobile Device Mockup Frame */
+    .preview-column {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .phone-mockup {
+      width: 380px;
+      height: 720px;
+      background: #000;
+      border-radius: 44px;
+      border: 10px solid #1e293b;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(212, 175, 55, 0.15);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .phone-notch {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 130px;
+      height: 22px;
+      background: #1e293b;
+      border-bottom-left-radius: 14px;
+      border-bottom-right-radius: 14px;
+      z-index: 10;
+    }
+
+    .phone-mockup iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: #0a0f1d;
+    }
+
+    .preview-info {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #10b981;
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      display: none;
+      animation: fadeIn 0.3s;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1 class="brand-title">
+      🎟️ Bộ Tạo Link Thiệp Mời 20/11 • NURTURER
+      <span>WESET English Center</span>
+    </h1>
+    <a href="index.html" class="btn-outline" style="text-decoration:none; padding:6px 12px; font-size:0.8rem;">
+      ← Xem Trang Thiệp Gốc
+    </a>
+  </header>
+
+  <div class="main-grid">
+    <!-- Configuration & Batch Generator Column -->
+    <div class="panel">
+      <div class="panel-header">
+        <h2 class="panel-title">1. Cấu Hình Đường Dẫn Gốc (Base URL)</h2>
+        <p class="panel-desc">Nhập URL GitHub Pages hoặc tên miền của trang thiệp mời</p>
+      </div>
+
+      <div class="form-group">
+        <label for="base-url">URL gốc của trang web:</label>
+        <input type="text" id="base-url" value="index.html" placeholder="https://username.github.io/InviteTicketWebApp/">
+      </div>
+
+      <div class="panel-header" style="margin-top: 10px;">
+        <h2 class="panel-title">2. Danh Sách Khách Mời (Nhập Theo Định Dạng: Mã, Tên)</h2>
+        <p class="panel-desc">Mỗi khách mời một dòng theo cú pháp: Mã_Khách, Tên_Khách</p>
+      </div>
+
+      <div class="form-group">
+        <textarea id="guest-input" placeholder="VIP-001, Nguyễn Văn An
+VIP-002, Trần Thị Mai
+VIP-003, Lê Hoàng Long
+VIP-004, Phạm Thu Trang
+VIP-005, Michael Johnson">VIP-001, Nguyễn Văn An
+VIP-002, Trần Thị Mai
+VIP-003, Lê Hoàng Long
+VIP-004, Phạm Thu Trang
+VIP-005, Michael Johnson</textarea>
+      </div>
+
+      <div class="btn-row">
+        <button type="button" class="btn-gold" id="btn-generate">
+          ⚡ Tạo Danh Sách Link
+        </button>
+        <button type="button" class="btn-outline" id="btn-copy-all">
+          📋 Sao Chép Toàn Bộ Link
+        </button>
+        <button type="button" class="btn-outline" id="btn-export-csv">
+          📥 Xuất Tệp CSV (Dùng Cho Email)
+        </button>
+      </div>
+
+      <div class="panel-header" style="margin-top: 14px;">
+        <h2 class="panel-title">3. Bảng Kết Quả & Thử Nghiệm</h2>
+        <p class="panel-desc">Nhấp "Xem trước" để nạp ngay vào khung điện thoại bên cạnh</p>
+      </div>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Mã Khách</th>
+              <th>Họ và Tên</th>
+              <th>Đường Dẫn Cá Nhân Hóa (RSVP URL)</th>
+              <th>Thao Tác</th>
+            </tr>
+          </thead>
+          <tbody id="result-tbody">
+            <!-- Rendered by JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Live Mobile Preview Column -->
+    <div class="preview-column">
+      <div class="phone-mockup">
+        <div class="phone-notch"></div>
+        <iframe id="preview-iframe" src="index.html?id=VIP-001&name=Nguy%E1%BB%85n%20V%C4%83n%20An"></iframe>
+      </div>
+      <p class="preview-info">
+        📱 Khung xem trước thời gian thực chuẩn iPhone / Mobile
+      </p>
+    </div>
+  </div>
+
+  <div id="toast" class="toast">Đã sao chép!</div>
+
+  <script>
+    const baseUrlInput = document.getElementById("base-url");
+    const guestInput = document.getElementById("guest-input");
+    const btnGenerate = document.getElementById("btn-generate");
+    const btnCopyAll = document.getElementById("btn-copy-all");
+    const btnExportCsv = document.getElementById("btn-export-csv");
+    const resultTbody = document.getElementById("result-tbody");
+    const previewIframe = document.getElementById("preview-iframe");
+    const toast = document.getElementById("toast");
+
+    let currentGuestList = [];
+
+    function showToast(msg) {
+      toast.textContent = msg;
+      toast.style.display = "block";
+      setTimeout(() => { toast.style.display = "none"; }, 2500);
+    }
+
+    function generateLinks() {
+      const rawText = guestInput.value.trim();
+      let baseUrl = baseUrlInput.value.trim();
+      if (!baseUrl) baseUrl = "index.html";
+
+      const lines = rawText.split("\n");
+      currentGuestList = [];
+
+      lines.forEach((line) => {
+        const parts = line.split(",").map(p => p.trim());
+        if (parts.length >= 1 && parts[0] !== "") {
+          const id = parts[0];
+          const name = parts[1] || "Quý Khách";
+          
+          // Formulate URL
+          const separator = baseUrl.includes("?") ? "&" : "?";
+          const fullUrl = `${baseUrl}${separator}id=${encodeURIComponent(id)}&name=${encodeURIComponent(name)}`;
+          
+          currentGuestList.push({ id, name, fullUrl });
+        }
+      });
+
+      renderTable();
+    }
+
+    function renderTable() {
+      resultTbody.innerHTML = "";
+
+      if (currentGuestList.length === 0) {
+        resultTbody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:#94a3b8; padding:20px;">Chưa có dữ liệu khách mời</td></tr>`;
+        return;
+      }
+
+      currentGuestList.forEach((guest, idx) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td><strong>${guest.id}</strong></td>
+          <td>${guest.name}</td>
+          <td class="url-cell" title="${guest.fullUrl}">${guest.fullUrl}</td>
+          <td style="white-space:nowrap;">
+            <button type="button" class="btn-outline" style="padding:4px 8px; font-size:0.75rem;" onclick="previewGuest('${encodeURIComponent(guest.fullUrl)}')">
+              👁️ Xem
+            </button>
+            <button type="button" class="btn-outline" style="padding:4px 8px; font-size:0.75rem;" onclick="copySingle('${encodeURIComponent(guest.fullUrl)}')">
+              📋 Copy
+            </button>
+          </td>
+        `;
+        resultTbody.appendChild(tr);
+      });
+    }
+
+    window.previewGuest = function(encodedUrl) {
+      const url = decodeURIComponent(encodedUrl);
+      previewIframe.src = url;
+      showToast("Đang xem trước khách mời!");
+    };
+
+    window.copySingle = function(encodedUrl) {
+      const url = decodeURIComponent(encodedUrl);
+      navigator.clipboard.writeText(url).then(() => {
+        showToast("Đã sao chép liên kết vào bộ nhớ tạm!");
+      });
+    };
+
+    btnGenerate.addEventListener("click", () => {
+      generateLinks();
+      showToast("Đã tạo liên kết thành công!");
+    });
+
+    btnCopyAll.addEventListener("click", () => {
+      if (currentGuestList.length === 0) return;
+      const allUrls = currentGuestList.map(g => `${g.id}\t${g.name}\t${g.fullUrl}`).join("\n");
+      navigator.clipboard.writeText(allUrls).then(() => {
+        showToast(`Đã sao chép ${currentGuestList.length} liên kết!`);
+      });
+    });
+
+    btnExportCsv.addEventListener("click", () => {
+      if (currentGuestList.length === 0) return;
+      let csvContent = "\uFEFFGuest_ID,Guest_Name,Invitation_URL\n";
+      currentGuestList.forEach(g => {
+        csvContent += `"${g.id}","${g.name}","${g.fullUrl}"\n`;
+      });
+      const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "danh_sach_link_thiep_moi.csv";
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast("Đã tải xuống tệp CSV!");
+    });
+
+    // Auto-generate on first load
+    generateLinks();
+  </script>
+</body>
+</html>
