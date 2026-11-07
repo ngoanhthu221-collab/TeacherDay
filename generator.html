@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Trình Tạo Link Thiệp Mời Hàng Loạt & Xem Trước | Bulk Link Generator</title>
-  
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
+    rel="stylesheet">
 
   <style>
     :root {
@@ -24,7 +27,11 @@
       --font-mono: 'JetBrains Mono', monospace;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     body {
       background-color: var(--bg-dark);
@@ -118,7 +125,8 @@
       color: var(--gold-light);
     }
 
-    input, textarea {
+    input,
+    textarea {
       width: 100%;
       background: rgba(10, 15, 29, 0.85);
       border: 1px solid rgba(212, 175, 55, 0.3);
@@ -130,7 +138,8 @@
       outline: none;
     }
 
-    input:focus, textarea:focus {
+    input:focus,
+    textarea:focus {
       border-color: var(--gold-primary);
       box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
     }
@@ -280,12 +289,13 @@
       padding: 10px 18px;
       border-radius: var(--radius-sm);
       font-size: 0.85rem;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
       display: none;
       animation: fadeIn 0.3s;
     }
   </style>
 </head>
+
 <body>
 
   <header>
@@ -308,24 +318,21 @@
 
       <div class="form-group">
         <label for="base-url">URL gốc của trang web:</label>
-        <input type="text" id="base-url" value="index.html" placeholder="https://username.github.io/InviteTicketWebApp/">
+        <input type="text" id="base-url" value="index.html"
+          placeholder="https://username.github.io/InviteTicketWebApp/">
       </div>
 
       <div class="panel-header" style="margin-top: 10px;">
-        <h2 class="panel-title">2. Danh Sách Khách Mời (Nhập Theo Định Dạng: Mã, Tên)</h2>
-        <p class="panel-desc">Mỗi khách mời một dòng theo cú pháp: Mã_Khách, Tên_Khách</p>
+        <h2 class="panel-title">2. Danh Sách Khách Mời (Nhập Theo Định Dạng: Mã, Chức vụ, Tên)</h2>
+        <p class="panel-desc">Mỗi khách mời một dòng theo cú pháp: Mã_Khách, Chức_vụ, Tên_Khách</p>
       </div>
 
       <div class="form-group">
-        <textarea id="guest-input" placeholder="VIP-001, Nguyễn Văn An
-VIP-002, Trần Thị Mai
-VIP-003, Lê Hoàng Long
-VIP-004, Phạm Thu Trang
-VIP-005, Michael Johnson">VIP-001, Nguyễn Văn An
-VIP-002, Trần Thị Mai
-VIP-003, Lê Hoàng Long
-VIP-004, Phạm Thu Trang
-VIP-005, Michael Johnson</textarea>
+        <textarea id="guest-input" placeholder="VIP-001, Hiệu trưởng, Nguyễn Văn An
+VIP-002, Giảng viên, Trần Thị Mai
+VIP-003, Trưởng phòng, Lê Hoàng Long">VIP-001, Hiệu trưởng, Nguyễn Văn An
+VIP-002, Giảng viên, Trần Thị Mai
+VIP-003, Trưởng phòng, Lê Hoàng Long</textarea>
       </div>
 
       <div class="btn-row">
@@ -406,12 +413,14 @@ VIP-005, Michael Johnson</textarea>
         const parts = line.split(",").map(p => p.trim());
         if (parts.length >= 1 && parts[0] !== "") {
           const id = parts[0];
-          const name = parts[1] || "Quý Khách";
-          
+          const role = parts[1] || "";
+          const name = parts[2] || "Quý Khách";
+
           // Formulate URL
           const separator = baseUrl.includes("?") ? "&" : "?";
-          const fullUrl = `${baseUrl}${separator}id=${encodeURIComponent(id)}&name=${encodeURIComponent(name)}`;
-          
+          const fullUrl = `${baseUrl}${separator}id=${encodeURIComponent(id)}&role=${encodeURIComponent(role)}&name=${encodeURIComponent(name)}`;
+
+          currentGuestList.push({ id, name, fullUrl });
           currentGuestList.push({ id, name, fullUrl });
         }
       });
@@ -446,13 +455,13 @@ VIP-005, Michael Johnson</textarea>
       });
     }
 
-    window.previewGuest = function(encodedUrl) {
+    window.previewGuest = function (encodedUrl) {
       const url = decodeURIComponent(encodedUrl);
       previewIframe.src = url;
       showToast("Đang xem trước khách mời!");
     };
 
-    window.copySingle = function(encodedUrl) {
+    window.copySingle = function (encodedUrl) {
       const url = decodeURIComponent(encodedUrl);
       navigator.clipboard.writeText(url).then(() => {
         showToast("Đã sao chép liên kết vào bộ nhớ tạm!");
@@ -492,4 +501,5 @@ VIP-005, Michael Johnson</textarea>
     generateLinks();
   </script>
 </body>
+
 </html>
