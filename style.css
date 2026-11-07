@@ -444,7 +444,7 @@ body::after {
 }
 
 .ticket-code {
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-family: monospace;
  color: #1a365d;
   letter-spacing: 1px;
