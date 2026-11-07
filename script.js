@@ -500,4 +500,98 @@ function openConfirmationModal(data) {
   if (!DOM.modalBackdrop) return;
   const isAttending = data.attendance === "Tham gia";
 
-  if (
+  if (DOM.modalGuestName) DOM.modalGuestName.textContent = `Kính gửi: ${data.guestName}`;
+  if (DOM.modalStatusBox) {
+    DOM.modalStatusBox.innerHTML = `
+      <div class="status-row">
+        <span class="status-label">Trạng thái:</span>
+        <span class="status-value" style="color: ${isAttending ? '#059669' : '#e11d48'};">
+          ${isAttending ? '✓ Xác nhận tham gia' : '✗ Không thể tham gia'}
+        </span>
+      </div>
+      <div class="status-row">
+        <span class="status-label">Chức vụ:</span>
+        <span class="status-value">${escapeHtml(data.guestRole)}</span>
+      </div>
+      ${data.notes ? `
+        <div class="status-row" style="flex-direction: column; gap: 2px; margin-top: 6px;">
+          <span class="status-label">Ghi chú:</span>
+          <span class="status-value" style="font-weight: normal; font-style: italic;">"${escapeHtml(data.notes)}"</span>
+        </div>
+      ` : ''}
+    `;
+  }
+  DOM.modalBackdrop.classList.remove("hidden");
+  document.body.style.overflow = "hidden";
+}
+
+function closeModal() {
+  if (!DOM.modalBackdrop) return;
+  DOM.modalBackdrop.classList.add("hidden");
+  document.body.style.overflow = "";
+}
+
+// ==============================================================================
+// 9. LOCAL STORAGE PERSISTENCE
+// ==============================================================================
+function getStorageKey() {
+  return CONFIG.storagePrefix + (state.guestId || "default");
+}
+
+function saveSubmissionState(data) {
+  try {
+    localStorage.setItem(getStorageKey(), JSON.stringify({ ...data, timestamp: new Date().toISOString() }));
+  } catch (err) {}
+}
+
+function checkExistingSubmission() {
+  try {
+    const saved = localStorage.getItem(getStorageKey());
+    if (saved) {
+      const data = JSON.parse(saved);
+      state.hasSubmitted = true;
+      disableFormInputs();
+      renderSubmittedBanner(data);
+    }
+  } catch (err) {}
+}
+
+// ==============================================================================
+// 10. TOAST NOTIFICATION UTILITY
+// ==============================================================================
+function showToast(message, type = "info") {
+  if (!DOM.toastContainer) return;
+
+  const toast = document.createElement("div");
+  toast.className = `toast toast-${type}`;
+
+  const iconSvg = type === "success" 
+    ? `<svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>`
+    : `<svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>`;
+
+  toast.innerHTML = `${iconSvg}<span class="toast-text">${escapeHtml(message)}</span>`;
+  DOM.toastContainer.appendChild(toast);
+  setTimeout(() => toast.remove(), 4000);
+}
+
+function escapeHtml(str) {
+  if (!str) return "";
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+// ==============================================================================
+// 11. BOOTSTRAP ON DOM READY
+// ==============================================================================
+document.addEventListener("DOMContentLoaded", () => {
+  initializeGuestData();
+  initializeEventDetails();
+  setupCountdown();
+  setupCalendarButtons();
+  setupAudio();
+  setupRsvpForm();
+});
