@@ -423,17 +423,18 @@ body::after {
  }
 
 .guest-ticket-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: #e6f0fa;
-   color: #1a365d
-  backdrop-filter: blur(6px);
-  border: 1px solid #b3d4f5;;
-  padding: 3px 12px;
-  border-radius: var(--radius-full);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #e6f0fa;
+    color: #1a365d !important;
+    font-weight: 700;
+    white-space: nowrap;
+    backdrop-filter: blur(6px);
+    border: 1px solid #b3d4f5;
+    padding: 6px 16px;
+    border-radius: var(--radius-full);
 }
-
 .badge-dot {
   width: 7px;
   height: 7px;
@@ -445,7 +446,7 @@ body::after {
 .ticket-code {
   font-size: 0.75rem;
   font-family: monospace;
-  color: #fef08a; /* Warm light yellow */
+ color: #1a365d; /* Warm light yellow */
   letter-spacing: 1px;
   font-weight: 600;
 }
