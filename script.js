@@ -779,3 +779,18 @@ document.addEventListener("DOMContentLoaded", () => {
   setupRsvpForm();
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const guestName = urlParams.get('name');
+    const guestRole = urlParams.get('role'); 
+    
+    if (guestName) {
+        const nameDisplay = document.querySelector('.guest-name-display');
+        if (nameDisplay) nameDisplay.textContent = guestName;
+    }
+    
+    if (guestRole) {
+        const roleDisplay = document.querySelector('.ticket-code'); 
+        if (roleDisplay) roleDisplay.textContent = guestRole;
+    }
+});
