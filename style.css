@@ -444,9 +444,9 @@ body::after {
 }
 
 .ticket-code {
-  font-size: 0.75rem;
+  font-size: 1rem;
   font-family: monospace;
- color: #1a365d; /* Warm light yellow */
+ color: #1a365d;
   letter-spacing: 1px;
   font-weight: 600;
 }
