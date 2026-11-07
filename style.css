@@ -445,11 +445,16 @@ body::after {
 }
 
 .ticket-code {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-family: monospace;
  color: #1a365d;
   letter-spacing: 1px;
   font-weight: 600;
+   white-space: normal !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    max-width: 100%;
+    display: inline-block;
 }
 
 .qr-toggle-wrapper {
