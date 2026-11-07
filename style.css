@@ -434,6 +434,7 @@ body::after {
     border: 1px solid #b3d4f5;
     padding: 6px 16px;
     border-radius: var(--radius-full);
+   font-size: 1.1rem !important;
 }
 .badge-dot {
   width: 7px;
